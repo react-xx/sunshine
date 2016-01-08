@@ -1,0 +1,8 @@
+
+var config = {
+  port: 7101,
+  mongodb: 'mongodb://localhost/scms',
+  redis: 'redis://localhost:6379'
+}
+
+module.exports = config;
