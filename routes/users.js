@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
             res.send(JSON.parse(lists));
         }
         else {
-            res.send({type:1});
+            res.send('无数据！');
             //res.send(JSON.parse(lists));
         }
 
