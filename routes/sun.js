@@ -1,18 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var redisClient = require('../config/redis');
+var robot = require('../bin/data/robot');
 
-/* GET users listing. */
+//获取热门列表
 router.post('/hotList', function(req, res, next) {
-    redisClient.lrange('hotList', 0, 0, function(err, hotList){
+    var pageNo = +req.body.pageNo;
+    redisClient.lrange('hotList', pageNo, pageNo, function(err, hotList){
         if (err) {
             next(err);
         };
-        if (hotList.length > 0) {
+        if (hotList && hotList.length > 0) {
             var hotList = {
                 success: true,
                 page: {
-                     pageNo: 1,
+                     pageNo: pageNo,
                      allPage: 20
                 },
                 result: JSON.parse(hotList)
@@ -21,10 +23,16 @@ router.post('/hotList', function(req, res, next) {
         }
         else {
             res.send('无数据！');
-            //res.send(JSON.parse(lists));
         }
 
     });
+});
+
+//抓取开始抓取数据
+
+router.get('/admin/getHot', function(req, res, next) {
+    robot();
+    res.send('您的请求已经收到，后台正在努力抓取最新的数据。。。');
 });
 
 module.exports = router;
