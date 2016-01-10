@@ -19,6 +19,7 @@ router.post('/hotList', function(req, res, next) {
                 },
                 result: JSON.parse(hotList)
             }
+            res.set('Content-Type', 'application/json');
             res.send(hotList);
         }
         else {
