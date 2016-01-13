@@ -6,7 +6,9 @@ var robot = require('../bin/data/robot');
 //获取热门列表
 router.post('/hotList', function(req, res, next) {
     var pageNo = +req.body.pageNo;
-    redisClient.lrange('hotList', pageNo, pageNo, function(err, hotList){
+    var dataTpye = req.body.dataType;
+    console.log(dataTpye);
+    redisClient.lrange(dataTpye, pageNo, pageNo, function(err, hotList){
         if (err) {
             next(err);
         };
