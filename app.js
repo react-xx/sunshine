@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var sunshine = require('./routes/sun');  //sun项目相关接口
+var demo = require('./routes/demo');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/sun', sunshine); // sun 接口
+app.use('/demo', demo); // demo 接口
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
